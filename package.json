@@ -1,8 +1,24 @@
 {
   "name": "fractalx-studio",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "private": true,
-  "description": "FractalX — Estudio creativo digital",
-  "scripts": { "dev": "node server.mjs", "check": "node --check dist/app.js" },
-  "type": "module"
+  "description": "FractalX — Portafolio audiovisual y portal de clientes",
+  "scripts": {
+    "dev": "node server.mjs",
+    "start": "node server.mjs",
+    "check": "node --check public/portal.js && node --check site/app.js && node --check site/icons.js",
+    "test": "node --test tests/portal.test.mjs"
+  },
+  "type": "module",
+  "dependencies": {
+    "express": "^5.3.0",
+    "express-rate-limit": "^8.7.3",
+    "helmet": "^8.3.0",
+    "multer": "^2.5.0",
+    "sharp": "^0.35.5",
+    "yazl": "^3.3.1"
+  },
+  "engines": {
+    "node": ">=24.18.0"
+  }
 }

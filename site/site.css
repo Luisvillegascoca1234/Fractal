@@ -1,0 +1,345 @@
+/* Layout utilities from the saved site, served locally without remote scripts. */
+[hidden] {
+  display: none !important;
+}
+.overflow-x-hidden {
+  overflow-x: hidden;
+}
+.fixed {
+  position: fixed;
+}
+.top-0 {
+  top: 0;
+}
+.inset-x-0 {
+  left: 0;
+  right: 0;
+}
+.z-50 {
+  z-index: 50;
+}
+.z-10 {
+  z-index: 10;
+}
+.relative {
+  position: relative;
+}
+.hidden {
+  display: none;
+}
+.grid {
+  display: grid;
+}
+.grid-cols-1 {
+  grid-template-columns: minmax(0, 1fr);
+}
+.grid-cols-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.gap-12 {
+  gap: 3rem;
+}
+.gap-5 {
+  gap: 1.25rem;
+}
+iconify-icon {
+  display: inline-flex;
+  vertical-align: middle;
+  align-items: center;
+  justify-content: center;
+}
+iconify-icon svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.portfolio-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0 0 22px;
+}
+.portfolio-filters button {
+  background: transparent;
+  color: rgba(245, 245, 240, 0.6);
+  border: 1px solid #ffffff20;
+  border-radius: 40px;
+  padding: 10px 17px;
+  font-size: 11px;
+  transition:
+    background 0.2s,
+    color 0.2s;
+}
+.portfolio-filters button:hover {
+  border-color: #c4ff0070;
+  color: var(--off);
+}
+.portfolio-filters button.active {
+  background: var(--lime);
+  border-color: var(--lime);
+  color: var(--noir);
+}
+.portfolio-note {
+  font-size: 10px;
+  line-height: 1.8;
+  color: rgba(245, 245, 240, 0.4);
+  margin: 0 0 22px;
+}
+.category-preview > .work-visual > .card-img {
+  filter: grayscale(1) brightness(0.48);
+}
+.category-art {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 28px 30px;
+}
+.category-art > .display {
+  font-size: clamp(2.9rem, 5.5vw, 4.8rem);
+  line-height: 0.99;
+}
+.category-art .tiny-label {
+  font-size: 8px;
+  letter-spacing: 0.16em;
+  color: #f5f5f09a;
+}
+.wide-card .category-art > .display {
+  font-size: clamp(3.2rem, 6vw, 5.4rem);
+}
+.drone-art {
+  background: #191b15;
+}
+.drone-art > svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  color: #c4ff0030;
+  transform: rotate(-12deg) scale(1.2);
+}
+.portfolio-play {
+  position: absolute;
+  right: 24px;
+  bottom: 24px;
+  background: var(--lime);
+  color: var(--noir);
+  height: 45px;
+  width: 45px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 18px;
+}
+.portfolio-work-title {
+  font-family: Archivo, sans-serif;
+  font-size: clamp(2.2rem, 4vw, 3.8rem);
+  font-weight: 700;
+  letter-spacing: -0.055em;
+  line-height: 1.05;
+}
+.portfolio-more {
+  display: flex;
+  justify-content: center;
+  margin-top: 32px;
+}
+.portfolio-empty {
+  grid-column: 1/-1;
+  text-align: center;
+  border: 1px solid #ffffff1a;
+  border-radius: 17px;
+  padding: 65px 25px;
+}
+.portfolio-empty h3 {
+  font-family: Archivo, sans-serif;
+  font-size: 27px;
+  letter-spacing: -0.04em;
+}
+.portfolio-empty p {
+  font-size: 13px;
+  color: var(--muted, #999b94);
+  margin: 18px 0 24px;
+  line-height: 1.8;
+}
+.project-dialog-image:has(video) {
+  aspect-ratio: 16/9;
+  background: #050505;
+}
+.project-dialog-image video {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+}
+.project-dialog-image > img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: #101010;
+}
+.media-failure {
+  font-size: 12px;
+  line-height: 1.8;
+  color: var(--off);
+  padding: 25px;
+  background: var(--coal);
+}
+.client-steps {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  border: 1px solid var(--hairline);
+  border-radius: 17px;
+  overflow: hidden;
+  background: var(--hairline);
+  margin-top: 40px;
+}
+.client-steps > div {
+  padding: 30px;
+  background: var(--noir);
+}
+.client-steps > div > span {
+  font-family: Archivo, sans-serif;
+  font-size: 12px;
+  color: var(--lime);
+}
+.client-steps h3 {
+  font-family: Archivo, sans-serif;
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  margin-top: 24px;
+}
+.client-steps p {
+  font-size: 12px;
+  line-height: 1.8;
+  color: #f5f5f079;
+  margin-top: 14px;
+  max-width: 280px;
+}
+.contact-title br {
+  display: block !important;
+}
+.archive-item-title {
+  max-width: 70%;
+}
+@media (min-width: 768px) {
+  .md\:grid-cols-12 {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+  }
+  .md\:grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .md\:grid-cols-4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+  .md\:col-span-2 {
+    grid-column: span 2 / span 2;
+  }
+  .md\:col-span-3 {
+    grid-column: span 3 / span 3;
+  }
+  .md\:col-span-4 {
+    grid-column: span 4 / span 4;
+  }
+  .md\:col-span-5 {
+    grid-column: span 5 / span 5;
+  }
+  .md\:col-span-7 {
+    grid-column: span 7 / span 7;
+  }
+  .md\:col-span-9 {
+    grid-column: span 9 / span 9;
+  }
+}
+@media (min-width: 1024px) {
+  .lg\:flex {
+    display: flex;
+  }
+}
+@media (max-width: 767px) {
+  .hero-title {
+    font-size: 15.8vw;
+  }
+  .nav-cta {
+    font-size: 8px;
+    padding: 11px 13px;
+  }
+  .portfolio-filters {
+    gap: 6px;
+  }
+  .portfolio-filters button {
+    font-size: 9px;
+    padding: 9px 12px;
+  }
+  .category-art {
+    padding: 23px;
+  }
+  .category-art > .display {
+    font-size: 11vw;
+  }
+  .category-art .tiny-label {
+    font-size: 6px;
+  }
+  .wide-card .category-art > .display {
+    font-size: 11vw;
+  }
+  .client-steps {
+    grid-template-columns: 1fr;
+  }
+  .client-steps > div {
+    padding: 25px;
+  }
+  .client-steps h3 {
+    margin-top: 15px;
+  }
+  .client-steps p {
+    font-size: 11px;
+    max-width: 100%;
+  }
+  .portfolio-empty h3 {
+    font-size: 23px;
+  }
+  .portfolio-work-title {
+    font-size: 29px;
+  }
+  .project-dialog-image {
+    aspect-ratio: 4/3;
+  }
+  .category-preview .tag {
+    font-size: 6px;
+    padding: 6px 8px;
+  }
+  .footer-grid {
+    grid-template-columns: 1fr;
+  }
+  .footer-column,
+  .footer-newsletter,
+  .footer-brand {
+    grid-column: auto;
+  }
+  .portfolio-play {
+    height: 36px;
+    width: 36px;
+    right: 18px;
+    bottom: 18px;
+  }
+}
+
+.project-dialog-image,
+.project-dialog-image:has(video) {
+  aspect-ratio: auto;
+  height: min(65dvh, 680px);
+}
+@media (max-width: 767px) {
+  .project-dialog-image,
+  .project-dialog-image:has(video) {
+    height: 55dvh;
+  }
+}

@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#0c0c0c" />
+    <meta name="robots" content="noindex,nofollow" />
+    <title>FractalX — Tu espacio fotográfico</title>
+    <link rel="icon" href="/clientes/assets/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:ital,wght@0,400;0,500;0,600;0,700;0,800;1,800&family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/clientes/portal.css" />
+    <script type="module" src="/clientes/portal.js"></script>
+  </head>
+  <body>
+    <a class="skip" href="#main">Ir al contenido</a>
+    <div id="app">
+      <div class="initial-loading">
+        <img
+          src="/clientes/assets/fractalx-logo-transparent.svg"
+          alt="FractalX"
+        /><span class="loading-dot"></span>
+        <p>Preparando tu espacio…</p>
+      </div>
+    </div>
+    <dialog id="modal" aria-labelledby="modal-title">
+      <button
+        class="dialog-close"
+        data-action="close-modal"
+        aria-label="Cerrar"
+      >
+        ×
+      </button>
+      <div id="modal-content"></div>
+    </dialog>
+    <dialog id="lightbox" aria-label="Vista de fotografía">
+      <div id="lightbox-content"></div>
+    </dialog>
+    <div id="toast" role="status" aria-live="polite"></div>
+  </body>
+</html>
