@@ -71,16 +71,23 @@ test("flujo completo, persistencia y aislamiento de fotografías", async (t) => 
   };
   let gallery, ids;
   await t.test(
-    "web principal pública y acceso de clientes independiente",
+    "inicio, portafolio público y acceso de clientes en páginas independientes",
     async () => {
       const web = await request(null, "/", { binary: true });
       assert.equal(web.status, 200);
-      assert.ok(web.data.toString().includes("Acceso clientes"));
-      assert.ok(web.data.toString().includes("Social media"));
+      const homepage = web.data.toString();
+      assert.ok(homepage.includes("Acceso clientes"));
+      assert.ok(homepage.includes("Social media"));
+      assert.match(homepage, /href="\/portafolio\/"/);
+      assert.doesNotMatch(homepage, /id="portfolio-grid"/);
       assert.match(
         web.headers.get("content-security-policy"),
         /script-src 'self'/,
       );
+      const portfolio = await request(null, "/portafolio/", { binary: true });
+      assert.equal(portfolio.status, 200);
+      assert.match(portfolio.data.toString(), /id="portfolio-grid"/);
+      assert.doesNotMatch(portfolio.data.toString(), /class="hero grain"/);
       const portal = await request(null, "/clientes/", { binary: true });
       assert.equal(portal.status, 200);
       assert.ok(portal.data.toString().includes("/clientes/portal.js"));

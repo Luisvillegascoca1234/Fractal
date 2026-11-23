@@ -1,5 +1,5 @@
 /* Translucent glass capsule with a light-catching rim. */
-.nav-pill {
+:is(.nav-pill, .glass-surface) {
   position: relative;
   isolation: isolate;
   background: linear-gradient(115deg, rgba(255,255,255,.09), rgba(255,255,255,.025) 42%, rgba(255,255,255,.055));
@@ -8,24 +8,24 @@
   -webkit-backdrop-filter: blur(28px) saturate(155%) brightness(1.12);
   box-shadow: 0 12px 40px rgba(0,0,0,.24), inset 0 1px 0 rgba(255,255,255,.32), inset 0 -1px 0 rgba(255,255,255,.06);
 }
-.nav-pill::before,
-.nav-pill::after {
+:is(.nav-pill, .glass-surface)::before,
+:is(.nav-pill, .glass-surface)::after {
   content: '';
   position: absolute;
   pointer-events: none;
   border-radius: inherit;
 }
-.nav-pill::before {
+:is(.nav-pill, .glass-surface)::before {
   inset: 0;
   z-index: 0;
   background: linear-gradient(115deg, rgba(255,255,255,.13), transparent 25%, transparent 68%, rgba(255,255,255,.045));
 }
-.nav-pill::after {
+:is(.nav-pill, .glass-surface)::after {
   inset: 1px;
   z-index: 1;
   box-shadow: inset 1px 0 1px rgba(255,255,255,.11), inset -1px 0 1px rgba(255,255,255,.05);
 }
-.nav-pill > * { position: relative; z-index: 2; }
+:is(.nav-pill, .glass-surface) > * { position: relative; z-index: 2; }
 .nav-links { gap: 10px; color: rgba(245,245,240,.8); }
 .nav-links a {
   padding: 10px 12px;
@@ -44,10 +44,10 @@
 .footer-logo { --brand-width: 179px; }
 .brand-logo img { position: static; width: 100%; max-width: 100%; height: 100%; object-fit: contain; mix-blend-mode: normal; }
 @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
-  .nav-pill { background-color: rgba(28,28,28,.94); }
+  :is(.nav-pill, .glass-surface) { background-color: rgba(28,28,28,.94); }
 }
 @media (max-width: 767px) {
   .brand-logo { --brand-width: 132px; }
   .footer-logo { --brand-width: 170px; }
-  .nav-pill { backdrop-filter: blur(22px) saturate(145%); -webkit-backdrop-filter: blur(22px) saturate(145%); }
+  :is(.nav-pill, .glass-surface) { backdrop-filter: blur(22px) saturate(145%); -webkit-backdrop-filter: blur(22px) saturate(145%); }
 }

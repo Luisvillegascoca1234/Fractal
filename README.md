@@ -11,11 +11,11 @@ npm ci
 npm run dev
 ```
 
-La web principal está en http://127.0.0.1:4173/. El acceso privado está en http://127.0.0.1:4173/clientes/. El servidor escucha únicamente en esta computadora. En la primera visita al apartado de clientes, crea tu administrador con tu nombre, correo y una contraseña de al menos 12 caracteres. No hay contraseñas predeterminadas.
+La web principal está en http://127.0.0.1:4173/. El portafolio público está en http://127.0.0.1:4173/portafolio/ y el acceso privado en http://127.0.0.1:4173/clientes/. El servidor escucha únicamente en esta computadora. En la primera visita al apartado de clientes, crea tu administrador con tu nombre, correo y una contraseña de al menos 12 caracteres. No hay contraseñas predeterminadas.
 
 ## Web principal y portafolio
 
-La página principal recupera la estructura del sitio original: menú flotante, gran titular, franja continua, estudio, tarjetas de trabajos, servicios y contacto. Los textos se adaptaron a fotografía, social media, video y drones. El botón **Acceso clientes** abre `/clientes/`. El logo del portal y sus enlaces de regreso vuelven a la web principal.
+La página principal conserva la portada y el menú flotante de vidrio de FractalX. **Portafolio** abre la galería en una página propia. Al pasar el ratón o enfocar una portada con el teclado, la imagen se desenfoca y aparece el título. En pantallas táctiles, el título queda visible debajo. Las portadas abren un visor con navegación entre los proyectos de la categoría seleccionada. El botón **Acceso clientes** abre `/clientes/`. El logo del portal y sus enlaces de regreso vuelven a la web principal.
 
 Para publicar trabajos, entra como administrador y abre **Portafolio**:
 
@@ -24,7 +24,7 @@ Para publicar trabajos, entra como administrador y abre **Portafolio**:
 3. Guarda el trabajo como borrador y pulsa **Publicar** cuando quieras mostrarlo. **Retirar del sitio** lo oculta sin borrar sus archivos.
 4. La web pública filtra por categoría, amplía las fotografías y reproduce los videos. El reproductor admite consultas por rangos para cargar y buscar dentro del MP4.
 
-El portafolio se gestiona separado de las galerías privadas: una foto de un cliente no se publica automáticamente. Los borradores tampoco tienen una ruta de archivo pública. Mientras no haya trabajos publicados se muestran referencias visuales identificadas como tales, heredadas del sitio original; no son trabajos reales del estudio.
+El portafolio se gestiona separado de las galerías privadas: una foto de un cliente no se publica automáticamente. Los borradores tampoco tienen una ruta de archivo pública. Mientras no haya trabajos publicados se muestran referencias visuales, entre ellas dos muestras generadas con IA. No son trabajos reales del estudio.
 
 Los archivos del portafolio se guardan en `data/portfolio/`, y solo se sirven a visitantes cuando el trabajo está publicado. Las vistas de administración requieren sesión de administrador.
 

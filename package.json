@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "node server.mjs",
     "start": "node server.mjs",
-    "check": "node --check public/portal.js && node --check site/app.js && node --check site/icons.js",
+    "check": "node --check public/portal.js && node --check site/app.js && node --check site/folio.js && node --check site/icons.js",
     "test": "node --test tests/portal.test.mjs"
   },
   "type": "module",

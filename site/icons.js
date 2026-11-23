@@ -2,6 +2,8 @@
 const studioIcons = {
   "arrow-up-right": "M7 17 17 7M7 7h10v10",
   "arrow-right": "M5 12h14m-6-6 6 6-6 6",
+  "chevron-left": "m15 18-6-6 6-6",
+  "chevron-right": "m9 18 6-6-6-6",
   calendar: "M4 5h16v16H4ZM16 3v4M8 3v4M4 11h16",
   x: "m6 6 12 12M6 18 18 6",
   award: "M12 3a6 6 0 1 0 0 12 6 6 0 0 0 0-12Zm-4 12-1 7 5-3 5 3-1-7",
