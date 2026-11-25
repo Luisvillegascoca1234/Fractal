@@ -52,7 +52,19 @@
   color: var(--off);
   font: 600 0.875rem/1.2 Inter, sans-serif;
   text-align: center;
+  overflow-wrap: anywhere;
   cursor: pointer;
+}
+
+.folio .portfolio-filters[data-dynamic] {
+  display: flex;
+  flex-wrap: wrap;
+  border-radius: 1.25rem;
+}
+
+.folio .portfolio-filters[data-dynamic] button {
+  flex: 1 1 6rem;
+  min-width: 0;
 }
 
 .folio .portfolio-filters button:hover:not([aria-pressed='true']) {
@@ -70,6 +82,12 @@
 .folio .portfolio-note {
   margin: 0;
   color: rgba(245, 245, 240, 0.68);
+  font-size: 0.875rem;
+}
+
+.folio-preview-status {
+  margin-bottom: 1.25rem;
+  color: var(--lime);
   font-size: 0.875rem;
 }
 
@@ -119,11 +137,16 @@
   background: var(--coal);
 }
 
-.folio-image img {
+.folio-image :is(img, video) {
   display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.folio-card-video {
+  background: radial-gradient(ellipse at 70% 30%, #232a19, var(--coal) 75%);
+  pointer-events: none;
 }
 
 .folio-caption {
@@ -147,7 +170,7 @@
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .folio-image img {
+  .folio-image :is(img, video) {
     transition: filter 0.24s ease, transform 0.24s ease;
   }
 
@@ -178,7 +201,7 @@
     font-weight: 600;
   }
 
-  .folio-card-button:is(:hover, :focus-visible) img {
+  .folio-card-button:is(:hover, :focus-visible) :is(img, video) {
     filter: blur(8px) brightness(0.66);
     transform: scale(1.065);
   }
@@ -245,6 +268,12 @@
   background: var(--noir);
 }
 
+#project-preview-label {
+  padding-inline-end: 0.4rem;
+  color: var(--lime);
+  font-size: 0.875rem;
+}
+
 .folio-viewer-nav {
   display: flex;
   align-items: center;
@@ -304,9 +333,28 @@
 .folio-viewer-media :is(img, video) {
   display: block;
   width: auto;
+  height: auto;
   max-width: 100%;
   max-height: 72dvh;
   object-fit: contain;
+}
+
+.folio-viewer-gallery {
+  grid-template-columns: minmax(0, 1fr);
+  place-items: start stretch;
+  gap: clamp(0.5rem, 1vw, 1rem);
+}
+
+.folio-viewer-item {
+  display: grid;
+  place-items: center;
+  min-width: 0;
+  margin: 0;
+}
+
+.folio-viewer-item video {
+  width: 100%;
+  aspect-ratio: auto 16 / 9;
 }
 
 .folio-viewer-info {
@@ -351,12 +399,14 @@
     grid-row: span 2;
   }
 
-  .folio-card:nth-child(5n + 1) {
+  .folio-card[data-cover-layout='portrait'],
+  .folio-card:not([data-cover-layout]):nth-child(5n + 1) {
     grid-row: span 4;
   }
 
-  .folio-card:nth-child(5n + 3),
-  .folio-card:nth-child(5n + 4) {
+  .folio-card[data-cover-layout='square'],
+  .folio-card:not([data-cover-layout]):nth-child(5n + 3),
+  .folio-card:not([data-cover-layout]):nth-child(5n + 4) {
     grid-row: span 3;
   }
 
@@ -364,6 +414,14 @@
     flex: 1;
     min-height: 0;
     aspect-ratio: auto;
+  }
+
+  .folio-viewer-gallery {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .folio-viewer-item:not(.folio-viewer-pair) {
+    grid-column: 1 / -1;
   }
 }
 
@@ -411,8 +469,13 @@
   }
 
   .folio-card[data-generated][data-reference-category='fotografia'] .folio-image,
-  .folio-card:not([data-reference-category]):nth-child(5n + 1) .folio-image {
+  .folio-card[data-cover-layout='portrait'] .folio-image,
+  .folio-card:not([data-reference-category], [data-cover-layout]):nth-child(5n + 1) .folio-image {
     aspect-ratio: 4 / 5;
+  }
+
+  .folio-card[data-cover-layout='square'] .folio-image {
+    aspect-ratio: 1;
   }
 
   .folio-viewer {
@@ -438,7 +501,7 @@
 
 @media (prefers-reduced-motion: reduce) {
   .folio .portfolio-filters button,
-  .folio-image img,
+  .folio-image :is(img, video),
   .folio-caption {
     transition: none;
   }

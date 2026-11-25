@@ -19,10 +19,10 @@ La página principal conserva la portada y el menú flotante de vidrio de Fracta
 
 Para publicar trabajos, entra como administrador y abre **Portafolio**:
 
-1. Pulsa **Nuevo trabajo**, indica título, categoría y descripción, y elige una portada JPG de hasta 35 MB.
-2. Si es un video, agrega un MP4 de hasta 300 MB. Video y Drones requieren el MP4 antes de publicar. Social media puede mostrar una fotografía o un video.
-3. Guarda el trabajo como borrador y pulsa **Publicar** cuando quieras mostrarlo. **Retirar del sitio** lo oculta sin borrar sus archivos.
-4. La web pública filtra por categoría, amplía las fotografías y reproduce los videos. El reproductor admite consultas por rangos para cargar y buscar dentro del MP4.
+1. Pulsa **Nueva categoría** si quieres crear un filtro propio. La categoría aparece en la web cuando publicas un trabajo que la usa.
+2. En **Nuevo trabajo**, indica el nombre que aparecerá sobre la portada y elige la categoría. Agrega hasta 10 archivos por subida. Puedes combinar fotos JPG de hasta 35 MB y videos MP4 de hasta 300 MB. Video y Drones requieren al menos un MP4 para publicar.
+3. Elige una portada JPG si quieres personalizarla. De forma automática se usa la primera foto o, si el trabajo tiene solo videos, un fotograma del primer video. El sitio adapta el encuadre de la tarjeta y acomoda los archivos del visor según su formato.
+4. Guarda como borrador y abre **Vista previa** para revisar el trabajo con tu sesión de administrador. Pulsa **Publicar** cuando esté listo. **Retirar del sitio** lo oculta sin borrar sus archivos.
 
 El portafolio se gestiona separado de las galerías privadas: una foto de un cliente no se publica automáticamente. Los borradores tampoco tienen una ruta de archivo pública. Mientras no haya trabajos publicados se muestran referencias visuales, entre ellas dos muestras generadas con IA. No son trabajos reales del estudio.
 
@@ -61,7 +61,7 @@ Esta versión es para pruebas locales. Todavía no se ha desplegado en internet.
 - `site/`: web principal restaurada desde el respaldo, con los estilos originales, textos audiovisuales y portafolio conectado.
 - `public/`: interfaz privada de acceso, servida en `/clientes/`.
 - `lib/portal.mjs`: acceso, cuentas, galerías, selección, archivos y entregas.
-- `lib/portfolio.mjs`: trabajos públicos, borradores, portadas y videos del portafolio.
+- `lib/portfolio.mjs`: categorías, trabajos, portadas y grupos de fotos y videos del portafolio.
 - `data/`: SQLite, originales, vistas con marca de agua y editadas. Se crea al iniciar y está excluida de Git. No borres esta carpeta para actualizar el código.
 - `dist/`: fuentes del sitio anterior, conservadas y fuera de la superficie pública del portal.
 - `tests/portal.test.mjs`: pruebas de integración con datos temporales independientes.

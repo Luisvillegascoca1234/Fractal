@@ -40,6 +40,7 @@ const state = {
   view: "galleries",
   galleries: [],
   portfolio: [],
+  portfolioCategories: [],
   clients: [],
   gallery: null,
   filter: "all",
@@ -173,38 +174,115 @@ async function loadHome() {
   state.gallery = null;
   render();
 }
-const workCategories = {
-  fotografia: "Fotografía",
-  social: "Social media",
-  video: "Video",
-  drones: "Drones",
-};
 async function loadPortfolioAdmin() {
-  state.portfolio = await api("/admin/portfolio");
+  [state.portfolio, state.portfolioCategories] = await Promise.all([
+    api("/admin/portfolio"),
+    api("/admin/portfolio/categories"),
+  ]);
   state.view = "portfolio";
   state.gallery = null;
   render();
 }
+function portfolioCard(work) {
+  const id = encodeURIComponent(work.id);
+  const items = work.items || [];
+  const firstVideo = items.find((item) => item.kind === "video");
+  let cover = `<span class="cover-icon">${icon("image")}</span>`;
+  if (work.has_cover) {
+    cover = `<img src="/api/admin/portfolio/${id}/cover" alt="" loading="lazy">`;
+  } else if (firstVideo) {
+    cover = `<video src="/api/admin/portfolio/${id}/items/${encodeURIComponent(firstVideo.id)}#t=0.1" preload="metadata" muted playsinline aria-hidden="true"></video>`;
+  }
+  const photoCount = items.filter((item) => item.kind === "image").length;
+  const videoCount = items.length - photoCount;
+  const details = [
+    work.category_name,
+    photoCount ? `${photoCount} ${photoCount === 1 ? "foto" : "fotos"}` : "",
+    videoCount ? `${videoCount} ${videoCount === 1 ? "video" : "videos"}` : "",
+  ].filter(Boolean).map(esc).join(" · ");
+  return `<article class="gallery-card portfolio-admin-card">
+    <div class="gallery-cover">${cover}<span class="tag ${work.published ? "selecting" : "draft"}">${work.published ? "Publicado" : "Borrador"}</span></div>
+    <div class="gallery-card-body">
+      <h2>${esc(work.title)}</h2>
+      <p>${details}</p>
+      <div class="portfolio-admin-actions">
+        <a class="btn btn-secondary" href="/portafolio/?vista-previa=${id}" target="_blank" rel="noopener" aria-label="Vista previa de ${esc(work.title)} (abre en otra pestaña)">${icon("eye")}Vista previa</a>
+        ${btn("Editar", "edit-work", "secondary", "settings", `data-id="${esc(work.id)}"`)}
+        ${btn(work.published ? "Retirar del sitio" : "Publicar", "publish-work", work.published ? "secondary" : "primary", work.published ? "archive" : "arrow", `data-id="${esc(work.id)}"`)}
+      </div>
+    </div>
+  </article>`;
+}
 function portfolioView() {
-  return `<div class="page-head"><div><p class="eyebrow">(Tu escaparate público / 03)</p><h1 class="display">EL TRABAJO<br><span>QUE SE VE.</span></h1><p class="head-copy">Publica fotografías, contenido para social media, videos y tomas con drones en tu sitio web.</p></div><div class="head-actions"><a class="btn btn-secondary" href="/" target="_blank" rel="noopener">Ver sitio web ${icon("arrow")}</a>${btn("Nuevo trabajo", "new-work", "primary", "plus")}</div></div><p class="protected-note">${icon("lock")}Solo aparecen en el sitio los trabajos que publiques aquí. Las galerías de clientes son privadas.</p>${state.portfolio.length ? `<div class="portfolio-admin-grid gallery-grid">${state.portfolio.map((w) => `<article class="gallery-card portfolio-admin-card"><div class="gallery-cover"><img src="/api/admin/portfolio/${w.id}/cover" alt="${esc(w.title)}" loading="lazy"><span class="tag ${w.published ? "selecting" : "draft"}">${w.published ? "Publicado" : "Borrador"}</span></div><div class="gallery-card-body"><h2>${esc(w.title)}</h2><p>${esc(workCategories[w.category])} · ${w.has_video ? "Video MP4" : "Fotografía"}</p><div class="portfolio-admin-actions">${btn("Editar", "edit-work", "secondary", "settings", `data-id="${w.id}"`)}${btn(w.published ? "Retirar del sitio" : "Publicar", "publish-work", w.published ? "secondary" : "primary", w.published ? "archive" : "arrow", `data-id="${w.id}"`)}</div></div></article>`).join("")}</div>` : `<section class="empty"><span class="empty-icon">${icon("image")}</span><h2>Tus trabajos tienen su lugar.</h2><p>Agrega una portada JPG, elige la categoría y sube un MP4 si es un video. Revisa el trabajo y publícalo en el sitio principal.</p>${btn("Crear primer trabajo", "new-work", "primary", "plus")}</section>`}`;
+  const cards = state.portfolio.map(portfolioCard).join("");
+  return `<div class="page-head">
+    <div><p class="eyebrow">(Tu escaparate público / 03)</p><h1 class="display">EL TRABAJO<br><span>QUE SE VE.</span></h1><p class="head-copy">Publica proyectos con fotografías, videos y tomas con drones.</p></div>
+    <div class="head-actions">
+      <a class="btn btn-secondary" href="/portafolio/" target="_blank" rel="noopener">Ver portafolio ${icon("arrow")}</a>
+      ${btn("Nueva categoría", "new-work-category", "secondary", "plus")}
+      ${btn("Nuevo trabajo", "new-work", "primary", "plus")}
+    </div>
+  </div>
+  <p class="protected-note">${icon("lock")}Solo aparecen en el sitio los trabajos que publiques aquí. Las galerías de clientes son privadas.</p>
+  ${cards ? `<div class="portfolio-admin-grid gallery-grid">${cards}</div>` : `<section class="empty">
+    <span class="empty-icon">${icon("image")}</span><h2>Tus trabajos tienen su lugar.</h2>
+    <p>Crea un trabajo, agrega sus archivos y revisa la vista previa antes de publicarlo.</p>
+    ${btn("Crear primer trabajo", "new-work", "primary", "plus")}
+  </section>`}`;
+}
+function portfolioCategoryForm() {
+  modal(
+    modalHead("Portafolio público", "Nueva categoría") +
+      `<form id="portfolio-category-form">
+        ${errorBox}
+        <label class="field">Nombre de la categoría
+          <input name="name" required maxlength="60" placeholder="Ej. Eventos" autofocus>
+          <small>Aparecerá como filtro cuando publiques un trabajo en esta categoría.</small>
+        </label>
+        <div class="dialog-actions">${btn("Cancelar", "close-modal")}<button type="submit" class="btn btn-primary">Crear categoría ${icon("check")}</button></div>
+      </form>`,
+  );
 }
 function portfolioForm(work = null) {
+  const categoryOptions = state.portfolioCategories.map(({ id, name, requires_video }) =>
+    `<option value="${esc(id)}"${requires_video ? ' data-requires-video="true"' : ""}${work?.category === id ? " selected" : ""}>${esc(name)}</option>`,
+  ).join("");
+  const items = (work?.items || []).filter((item) => item.removable || item.id === "video");
+  const removableItems = items.map((item) => {
+    const name = item.id === "video" ? "remove_video" : "remove_item";
+    return `<label class="field-check"><input type="checkbox" name="${name}" value="${item.id === "video" ? "on" : esc(item.id)}"><span>Quitar ${esc(item.name || "video actual")}</span></label>`;
+  }).join("");
+  const requiresVideo = state.portfolioCategories.find((category) => category.id === work?.category)?.requires_video;
   modal(
     modalHead(
       "Portafolio público",
       work ? "Editar trabajo" : "Nuevo trabajo",
-      "Los archivos de este formulario son para tu sitio web. Publica únicamente material que quieras mostrar de forma pública.",
     ) +
-      `<form id="portfolio-form" data-id="${work?.id || ""}">${errorBox}<label class="field">Título del trabajo<input name="title" required maxlength="120" value="${esc(work?.title || "")}" placeholder="Ej. Retratos · Luz natural"></label><label class="field">Categoría<select name="category" required>${Object.entries(
-        workCategories,
-      )
-        .map(
-          ([value, label]) =>
-            `<option value="${value}" ${work?.category === value ? "selected" : ""}>${label}</option>`,
-        )
-        .join(
-          "",
-        )}</select></label><label class="field">Descripción<textarea name="description" maxlength="1200" placeholder="Cuenta la idea detrás de este trabajo…">${esc(work?.description || "")}</textarea></label><label class="field">${work ? "Reemplazar portada (opcional)" : "Portada o fotografía"}<input type="file" name="cover" accept="image/jpeg,.jpg,.jpeg" ${work ? "" : "required"}><small>JPG de hasta 35 MB. Se utiliza en las tarjetas del portafolio.</small></label><label class="field">Video MP4 (opcional)<input type="file" name="video" accept="video/mp4,.mp4"><small>Hasta 300 MB. Las categorías Video y Drones requieren un MP4 para publicar.</small></label>${work?.has_video ? '<label class="field-check"><input type="checkbox" name="remove_video">Quitar el video actual</label>' : ""}<p class="dialog-note">Los trabajos nuevos se guardan como borradores. Después puedes pulsar Publicar para mostrarlos en la página principal.</p><div class="dialog-actions">${btn("Cancelar", "close-modal")}<button type="submit" class="btn btn-primary">Guardar trabajo ${icon("check")}</button></div></form>`,
+      `<form id="portfolio-form" data-id="${esc(work?.id)}">
+        ${errorBox}
+        <label class="field">Nombre del trabajo
+          <input name="title" required maxlength="120" value="${esc(work?.title)}" placeholder="Ej. Retratos con luz natural" autofocus>
+          <small>Se muestra cuando alguien pasa el ratón sobre la portada.</small>
+        </label>
+        <label class="field">Categoría
+          <select name="category" id="portfolio-category" required><option value="">Elige una categoría</option>${categoryOptions}</select>
+          <span id="portfolio-video-required" class="small"${requiresVideo ? "" : " hidden"}>Esta categoría requiere al menos un MP4 para publicar.</span>
+        </label>
+        <label class="field">Descripción
+          <textarea name="description" maxlength="1200" placeholder="Cuenta la idea detrás de este trabajo…">${esc(work?.description)}</textarea>
+        </label>
+        <label class="field">${work ? "Agregar fotos o videos" : "Fotos y videos"}
+          <input type="file" name="media" accept="image/jpeg,.jpg,.jpeg,video/mp4,.mp4" multiple>
+          <small>Hasta 10 archivos por carga. JPG de hasta 35 MB y MP4 de hasta 300 MB.</small>
+        </label>
+        <label class="field">${work?.has_cover ? "Reemplazar portada (opcional)" : "Portada personalizada (opcional)"}
+          <input type="file" name="cover" accept="image/jpeg,.jpg,.jpeg">
+          <small>Si no eliges una portada personalizada, se usa la primera foto o una vista del primer video.</small>
+        </label>
+        ${removableItems ? `<fieldset class="portfolio-current-files"><legend>Archivos guardados</legend><p class="small">Marca los archivos que quieras quitar al guardar.</p>${removableItems}</fieldset>` : ""}
+        ${work?.published ? "" : '<p class="dialog-note">Guarda el borrador para revisar la vista previa antes de publicar.</p>'}
+        <div class="dialog-actions">${btn("Cancelar", "close-modal")}<button type="submit" class="btn btn-primary">${work ? "Guardar cambios" : "Guardar borrador"} ${icon("check")}</button></div>
+      </form>`,
   );
 }
 function galleriesView() {
@@ -576,6 +654,7 @@ async function setState(status) {
 }
 const actions = {
   portfolio: loadPortfolioAdmin,
+  "new-work-category": portfolioCategoryForm,
   "new-work": () => portfolioForm(),
   "edit-work": (b) =>
     portfolioForm(state.portfolio.find((w) => w.id === b.dataset.id)),
@@ -615,6 +694,7 @@ const actions = {
     state.gallery = null;
     state.clients = [];
     state.portfolio = [];
+    state.portfolioCategories = [];
     state.galleries = [];
     state.search = "";
     state.filter = "all";
@@ -799,6 +879,9 @@ document.addEventListener("input", (event) => {
 });
 document.addEventListener("change", (event) => {
   if (event.target.id === "photo-files") uploadPhotos([...event.target.files]);
+  if (event.target.id === "portfolio-category") {
+    $("#portfolio-video-required").hidden = !event.target.selectedOptions[0]?.dataset.requiresVideo;
+  }
 });
 document.addEventListener("contextmenu", (event) => {
   if (event.target.closest(".photo-visual,.lightbox-image"))
@@ -840,6 +923,7 @@ document.addEventListener("submit", async (event) => {
       "confirm-form",
       "account-form",
       "portfolio-form",
+      "portfolio-category-form",
     ].includes(form.id)
   )
     return;
@@ -849,7 +933,8 @@ document.addEventListener("submit", async (event) => {
   submit.disabled = true;
   const error = $("#form-error", form);
   if (error) error.textContent = "";
-  const data = Object.fromEntries(new FormData(form));
+  const fields = new FormData(form);
+  const data = Object.fromEntries(fields);
   try {
     if (form.id === "auth-form") {
       const result = await api("/" + form.dataset.mode, {
@@ -900,37 +985,59 @@ document.addEventListener("submit", async (event) => {
       render();
       toast("Selección confirmada. ¡Gracias por elegir!");
     }
+    if (form.id === "portfolio-category-form") {
+      await api("/admin/portfolio/categories", { method: "POST", body: data });
+      closeModal();
+      await loadPortfolioAdmin();
+      toast("Categoría creada. Ya puedes asignarla a un trabajo.");
+    }
     if (form.id === "portfolio-form") {
-      const cover = form.elements.cover.files[0],
-        video = form.elements.video.files[0];
+      const cover = form.elements.cover.files[0];
+      const media = [...form.elements.media.files];
+      if (!form.dataset.id && !cover && !media.length)
+        throw new Error("Agrega al menos una foto o un video.");
       if (cover && cover.size > 35 * 1024 * 1024)
         throw new Error("La portada puede pesar hasta 35 MB.");
-      if (video && video.size > 300 * 1024 * 1024)
-        throw new Error("El video puede pesar hasta 300 MB.");
+      if (media.length > 10)
+        throw new Error("Puedes agregar hasta 10 archivos por carga.");
+      for (const file of media) {
+        const video = /\.mp4$/i.test(file.name);
+        if (!video && !/\.jpe?g$/i.test(file.name))
+          throw new Error(`${file.name} no es un JPG ni un MP4.`);
+        const maxMegabytes = video ? 300 : 35;
+        if (file.size > maxMegabytes * 1024 * 1024)
+          throw new Error(`${file.name} supera el límite de ${maxMegabytes} MB.`);
+      }
+      const removals = fields.getAll("remove_item");
+      fields.delete("remove_item");
+      if (removals.length) fields.set("remove_items", JSON.stringify(removals));
+      if (!media.length) fields.delete("media");
+      if (!cover) fields.delete("cover");
       state.uploadBusy = true;
       $$('[data-action="close-modal"]', $("#modal")).forEach(
         (b) => (b.disabled = true),
       );
+      const submitLabel = submit.innerHTML;
       submit.textContent = "Guardando archivos…";
       try {
-        await api(
+        const work = await api(
           "/admin/portfolio" + (form.dataset.id ? "/" + form.dataset.id : ""),
           {
             method: form.dataset.id ? "PUT" : "POST",
-            body: new FormData(form),
+            body: fields,
             raw: true,
           },
         );
         state.uploadBusy = false;
         closeModal();
         await loadPortfolioAdmin();
-        toast("Trabajo guardado. Puedes publicarlo cuando esté listo.");
+        toast(work.published ? "Cambios guardados." : "Borrador guardado. Abre Vista previa para revisarlo.");
       } finally {
         state.uploadBusy = false;
         $$('[data-action="close-modal"]', $("#modal")).forEach(
           (b) => (b.disabled = false),
         );
-        if (submit.isConnected) submit.textContent = "Guardar trabajo";
+        if (submit.isConnected) submit.innerHTML = submitLabel;
       }
     }
     if (form.id === "account-form") {

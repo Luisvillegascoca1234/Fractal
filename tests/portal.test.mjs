@@ -7,6 +7,14 @@ import sharp from "sharp";
 import { createPortal } from "../lib/portal.mjs";
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 
+function mp4Header() {
+  const bytes = Buffer.alloc(32);
+  bytes.writeUInt32BE(bytes.length, 0);
+  bytes.write("ftypisom", 4, "ascii");
+  bytes.write("isom", 16, "ascii");
+  return bytes;
+}
+
 test("flujo completo, persistencia y aislamiento de fotografías", async (t) => {
   const qaRoot = path.join(root, "qa");
   await fs.mkdir(qaRoot, { recursive: true });
@@ -160,13 +168,9 @@ test("flujo completo, persistencia y aislamiento de fotografías", async (t) => 
           "portada.jpg",
         );
         if (includeVideo) {
-          const mp4 = Buffer.alloc(32);
-          mp4.writeUInt32BE(32, 0);
-          mp4.write("ftypisom", 4, "ascii");
-          mp4.write("isom", 16, "ascii");
           f.append(
             "video",
-            new Blob([mp4], { type: "video/mp4" }),
+            new Blob([mp4Header()], { type: "video/mp4" }),
             "video.mp4",
           );
         }
@@ -358,6 +362,129 @@ test("flujo completo, persistencia y aislamiento de fotografías", async (t) => 
       assert.deepEqual((await request(client, "/api/galleries")).data, []);
     },
   );
+  await t.test("portafolio: categorías propias y grupos de fotos y clips", async () => {
+    const categories = "/api/admin/portfolio/categories";
+    const publicCategories = "/api/portfolio/categories";
+    const name = "Producción aérea";
+    const createCategory = (who, name) =>
+      request(who, categories, { method: "POST", body: { name } });
+
+    assert.equal((await request(null, categories)).status, 401);
+    assert.equal((await createCategory(client, name)).status, 403);
+    const created = await createCategory(admin, name);
+    assert.equal(created.status, 201);
+    const category = created.data.id;
+    assert.equal(created.data.name, name);
+    assert.equal((await createCategory(admin, "produccion AEREA")).status, 409);
+    const listsCategory = async (who, url) =>
+      (await request(who, url)).data.some(({ id }) => id === category);
+    assert.equal(await listsCategory(admin, categories), true);
+    assert.equal(await listsCategory(null, publicCategories), false);
+
+    const still = async (width, height) =>
+      sharp({ create: { width, height, channels: 3, background: "blue" } })
+        .jpeg()
+        .toBuffer();
+    const portrait = await still(120, 180);
+    const landscape = await still(180, 120);
+    const title = "Atardecer desde el aire";
+    const workForm = (name = title, categoryId = category) => {
+      const data = new FormData();
+      data.append("title", name);
+      data.append("category", categoryId);
+      return data;
+    };
+    const grouped = workForm();
+    for (const [filename, bytes, type] of [
+      ["vuelo.mp4", mp4Header(), "video/mp4"],
+      ["vertical.jpg", portrait, "image/jpeg"],
+      ["panorama.jpg", landscape, "image/jpeg"],
+    ])
+      grouped.append("media", new Blob([bytes], { type }), filename);
+    const draft = await request(admin, "/api/admin/portfolio", {
+      method: "POST",
+      form: grouped,
+    });
+    assert.equal(draft.status, 201);
+    assert.equal(draft.data.published, false);
+    assert.equal(draft.data.category_name, name);
+    assert.equal(draft.data.has_cover, true);
+    assert.deepEqual([draft.data.cover_width, draft.data.cover_height], [120, 180]);
+    const items = draft.data.items;
+    assert.deepEqual(items.map(({ kind }) => kind), ["video", "image", "image"]);
+    assert.deepEqual(items.map(({ name }) => name), [
+      "vuelo.mp4",
+      "vertical.jpg",
+      "panorama.jpg",
+    ]);
+    assert.deepEqual(
+      items.slice(1).map(({ width, height }) => [width, height]),
+      [[120, 180], [180, 120]],
+    );
+
+    const publicWork = `/api/portfolio/${draft.data.id}`;
+    const adminWork = `/api/admin/portfolio/${draft.data.id}`;
+    const firstPhoto = `/items/${items[1].id}`;
+    assert.equal((await request(client, adminWork)).status, 403);
+    const preview = await request(admin, adminWork);
+    assert.equal(preview.status, 200);
+    assert.equal(preview.data.title, title);
+    assert.equal((await request(null, publicWork + firstPhoto)).status, 404);
+    assert.equal(
+      (await request(admin, adminWork + firstPhoto, { binary: true })).status,
+      200,
+    );
+
+    const drones = workForm("Sobre las nubes", "drones");
+    drones.append(
+      "media",
+      new Blob([mp4Header()], { type: "video/mp4" }),
+      "nubes.mp4",
+    );
+    const videoOnly = await request(admin, "/api/admin/portfolio", {
+      method: "POST",
+      form: drones,
+    });
+    assert.equal(videoOnly.status, 201);
+    assert.equal(videoOnly.data.has_cover, false);
+    const [droneClip] = videoOnly.data.items;
+    assert.equal(droneClip.kind, "video");
+    assert.equal(
+      (await request(admin, `${adminWork}/items/${droneClip.id}`)).status,
+      404,
+    );
+
+    const setPublished = (published) =>
+      request(admin, adminWork + "/publication", {
+        method: "PATCH",
+        body: { published },
+      });
+    assert.equal((await setPublished(true)).status, 200);
+    assert.equal(await listsCategory(null, publicCategories), true);
+    const publicList = (await request(null, "/api/portfolio")).data;
+    const published = publicList.find(({ id }) => id === draft.data.id);
+    assert.equal(published?.title, title);
+    assert.deepEqual(published.items.map(({ id }) => id), items.map(({ id }) => id));
+    assert.notEqual(published.items[0].name, items[0].name);
+    const cover = await request(null, publicWork + "/cover", { binary: true });
+    assert.equal(cover.status, 200);
+    const { width, height } = await sharp(cover.data).metadata();
+    assert.deepEqual([width, height], [120, 180]);
+
+    const edit = workForm();
+    edit.append("remove_items", JSON.stringify([items[1].id]));
+    const updated = await request(admin, adminWork, { method: "PUT", form: edit });
+    assert.equal(updated.status, 200);
+    assert.deepEqual([updated.data.cover_width, updated.data.cover_height], [180, 120]);
+    assert.equal((await request(null, publicWork + firstPhoto)).status, 404);
+
+    assert.equal((await setPublished(false)).status, 200);
+    assert.equal(
+      (await request(null, `${publicWork}/items/${items[0].id}`)).status,
+      404,
+    );
+    assert.equal(await listsCategory(null, publicCategories), false);
+  });
   await t.test(
     "JPG verificados, previsualización reducida y originales privados",
     async () => {

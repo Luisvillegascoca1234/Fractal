@@ -2032,6 +2032,28 @@ body:has(dialog[open]) {
 .portfolio-admin-card {
   cursor: default;
 }
+.portfolio-admin-card .gallery-cover video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.77);
+}
+.portfolio-current-files {
+  min-width: 0;
+  margin: 0 0 18px;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+}
+.portfolio-current-files legend {
+  padding-inline: 5px;
+  color: var(--off);
+  font-size: 11px;
+}
+.portfolio-current-files .field-check {
+  margin-block: 10px 0;
+  overflow-wrap: anywhere;
+}
 .portfolio-admin-actions {
   display: flex;
   gap: 8px;
