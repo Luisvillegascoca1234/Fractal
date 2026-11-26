@@ -191,18 +191,28 @@ iconify-icon svg {
   background: var(--coal);
 }
 .client-steps {
+  position: relative;
+  isolation: isolate;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1px;
-  border: 1px solid var(--hairline);
-  border-radius: 17px;
-  overflow: hidden;
-  background: var(--hairline);
+  gap: clamp(12px, 1.6vw, 20px);
   margin-top: 40px;
 }
-.client-steps > div {
+.client-steps::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 12% 12%, rgb(var(--accent-rgb) / 18%), transparent 47%),
+    radial-gradient(ellipse at 82% 78%, rgb(255 255 255 / 13%), transparent 46%);
+  filter: blur(22px);
+}
+.client-steps > .glass-surface {
+  min-width: 0;
   padding: 30px;
-  background: var(--noir);
+  border-radius: 17px;
 }
 .client-steps > div > span {
   font-family: Archivo, sans-serif;
@@ -219,7 +229,7 @@ iconify-icon svg {
 .client-steps p {
   font-size: 12px;
   line-height: 1.8;
-  color: #f5f5f079;
+  color: rgb(245 245 240 / 75%);
   margin-top: 14px;
   max-width: 280px;
 }
@@ -293,7 +303,7 @@ iconify-icon svg {
   .client-steps {
     grid-template-columns: 1fr;
   }
-  .client-steps > div {
+  .client-steps > .glass-surface {
     padding: 25px;
   }
   .client-steps h3 {
