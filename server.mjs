@@ -2,7 +2,7 @@ import { createPortal } from "./lib/portal.mjs";
 const port = Number(process.env.PORT || 4173);
 const { app, close } = createPortal({ origin: `http://127.0.0.1:${port}` });
 const server = app.listen(port, "127.0.0.1", () =>
-  console.log(`FractalX · Portal local: http://127.0.0.1:${port}`),
+  console.log(`Fractal · Portal local: http://127.0.0.1:${port}`),
 );
 server.on("error", (error) => {
   console.error(

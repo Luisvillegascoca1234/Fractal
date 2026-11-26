@@ -3,7 +3,7 @@
   --coal: #141414;
   --card: #1b1b1b;
   --off: #f5f5f0;
-  --lime: #c4ff00;
+  --accent: #ffd604;
   --muted: #999b94;
   --line: #ffffff14;
   color-scheme: dark;
@@ -58,11 +58,11 @@ p {
   margin: 0;
 }
 ::selection {
-  background: var(--lime);
+  background: var(--accent);
   color: var(--bg);
 }
 :focus-visible {
-  outline: 2px solid var(--lime);
+  outline: 2px solid var(--accent);
   outline-offset: 4px;
 }
 button:focus:not(:focus-visible) {
@@ -86,7 +86,7 @@ svg.icon {
   position: fixed;
   top: -100px;
   left: 20px;
-  background: var(--lime);
+  background: var(--accent);
   color: var(--bg);
   padding: 15px;
   z-index: 100;
@@ -102,14 +102,14 @@ svg.icon {
   letter-spacing: -0.015em;
 }
 .accent {
-  color: var(--lime);
+  color: var(--accent);
 }
 .muted {
   color: var(--muted);
 }
 .eyebrow {
   font-size: 10px;
-  color: var(--lime);
+  color: var(--accent);
   letter-spacing: 0.2em;
   text-transform: uppercase;
   font-weight: 500;
@@ -139,9 +139,9 @@ svg.icon {
 }
 .tag.selecting,
 .tag.delivered {
-  color: var(--lime);
-  background: #c4ff000a;
-  border-color: #c4ff0038;
+  color: var(--accent);
+  background: #ffd6040a;
+  border-color: #ffd60438;
 }
 .tag.draft,
 .tag.archived {
@@ -168,7 +168,7 @@ svg.icon {
   transform: translateY(-1px);
 }
 .btn-primary {
-  background: var(--lime);
+  background: var(--accent);
   color: var(--bg);
 }
 .btn-primary:hover {
@@ -180,7 +180,7 @@ svg.icon {
   color: var(--off);
 }
 .btn-secondary:hover {
-  border-color: var(--lime);
+  border-color: var(--accent);
 }
 .btn-plain {
   background: transparent;
@@ -209,8 +209,9 @@ svg.icon {
   background: #ffffff0d;
 }
 .logo {
-  width: 156px;
-  height: 34px;
+  display: block;
+  width: auto;
+  height: 54px;
   object-fit: contain;
 }
 .shell {
@@ -284,7 +285,7 @@ svg.icon {
   border: 1px solid #ffffff17;
   font-size: 10px;
   letter-spacing: 0.04em;
-  color: var(--lime);
+  color: var(--accent);
 }
 .user-chip strong {
   display: block;
@@ -419,7 +420,7 @@ main.workspace {
   outline: 0;
 }
 .search:focus-within input {
-  border-color: #c4ff0070;
+  border-color: #ffd60470;
 }
 .gallery-grid {
   display: grid;
@@ -507,7 +508,7 @@ main.workspace {
   color: var(--muted);
 }
 .gallery-card-meta .arrow {
-  background: var(--lime);
+  background: var(--accent);
   color: var(--bg);
   border-radius: 50%;
   width: 30px;
@@ -538,7 +539,7 @@ main.workspace {
   border: 1px solid #ffffff15;
   border-radius: 18px;
   margin-bottom: 20px;
-  color: var(--lime);
+  color: var(--accent);
 }
 .empty-icon svg {
   width: 26px;
@@ -564,7 +565,7 @@ main.workspace {
 }
 .workflow-hints span {
   display: block;
-  color: var(--lime);
+  color: var(--accent);
   font-family: Archivo, sans-serif;
   font-size: 13px;
   margin-bottom: 11px;
@@ -588,7 +589,7 @@ main.workspace {
 }
 .workspace-footer b {
   font-weight: 400;
-  color: var(--lime);
+  color: var(--accent);
   margin-left: 7px;
 }
 .breadcrumb {
@@ -671,8 +672,8 @@ main.workspace {
 }
 .workflow-step.current span {
   color: var(--bg);
-  background: var(--lime);
-  border-color: var(--lime);
+  background: var(--accent);
+  border-color: var(--accent);
 }
 .workflow-line {
   flex: 1;
@@ -719,7 +720,7 @@ main.workspace {
   margin-bottom: 6px;
 }
 .info-numbers > div:last-child b {
-  color: var(--lime);
+  color: var(--accent);
 }
 .gallery-note {
   font-size: 12px;
@@ -741,7 +742,7 @@ main.workspace {
 .protected-note svg {
   width: 13px;
   height: 13px;
-  color: var(--lime);
+  color: var(--accent);
 }
 .photo-grid {
   display: grid;
@@ -757,7 +758,7 @@ main.workspace {
   transition: border-color 0.2s;
 }
 .photo-card.selected {
-  border-color: #c4ff0080;
+  border-color: #ffd60480;
 }
 .photo-visual {
   aspect-ratio: 4/5;
@@ -814,9 +815,9 @@ main.workspace {
   height: 15px;
 }
 .photo-card.selected .photo-choice {
-  background: var(--lime);
+  background: var(--accent);
   color: var(--bg);
-  border-color: var(--lime);
+  border-color: var(--accent);
 }
 .photo-caption {
   padding: 14px;
@@ -833,7 +834,7 @@ main.workspace {
 }
 .photo-caption small {
   font-size: 8px;
-  color: var(--lime);
+  color: var(--accent);
 }
 .photo-edit {
   display: flex;
@@ -883,14 +884,14 @@ main.workspace {
   margin-top: 3px;
 }
 .selection-copy strong {
-  color: var(--lime);
+  color: var(--accent);
   font-weight: 600;
 }
 .saving-dot {
   display: inline-block;
   width: 5px;
   height: 5px;
-  background: var(--lime);
+  background: var(--accent);
   border-radius: 50%;
   margin-left: 7px;
 }
@@ -989,8 +990,8 @@ td small {
   z-index: 1;
 }
 .auth-art .logo {
-  width: 174px;
-  height: 35px;
+  width: 126px;
+  height: auto;
 }
 .auth-art-copy h1 {
   font-size: clamp(3.4rem, 6.6vw, 6.8rem);
@@ -1015,7 +1016,7 @@ td small {
 }
 .auth-star {
   font-size: 42px;
-  color: var(--lime);
+  color: var(--accent);
 }
 .auth-form-side {
   display: flex;
@@ -1034,7 +1035,7 @@ td small {
 .auth-form-top i {
   width: 5px;
   height: 5px;
-  background: var(--lime);
+  background: var(--accent);
   border-radius: 50%;
 }
 .auth-form {
@@ -1104,7 +1105,7 @@ td small {
 .field input:focus,
 .field select:focus,
 .field textarea:focus {
-  border-color: #c4ff0080;
+  border-color: #ffd60480;
 }
 .field textarea {
   resize: vertical;
@@ -1130,7 +1131,7 @@ td small {
   margin-top: 9px;
 }
 .password-wrap:focus-within {
-  border-color: #c4ff0080;
+  border-color: #ffd60480;
 }
 .password-wrap input {
   margin: 0;
@@ -1161,7 +1162,7 @@ td small {
   margin: 16px 0;
 }
 .field-check input {
-  accent-color: var(--lime);
+  accent-color: var(--accent);
   margin-top: 3px;
   width: 15px;
   height: 15px;
@@ -1189,7 +1190,8 @@ td small {
   gap: 20px;
 }
 .initial-loading img {
-  width: 180px;
+  width: 140px;
+  height: auto;
 }
 .initial-loading p {
   font-size: 11px;
@@ -1198,7 +1200,7 @@ td small {
 .loading-dot {
   height: 6px;
   width: 6px;
-  background: var(--lime);
+  background: var(--accent);
   border-radius: 50%;
   animation: pulse 1s ease-in-out infinite;
 }
@@ -1246,7 +1248,7 @@ body:has(dialog[open]) {
   line-height: 1;
 }
 .dialog-close:hover {
-  background: var(--lime);
+  background: var(--accent);
   color: var(--bg);
 }
 .dialog-head {
@@ -1278,7 +1280,7 @@ body:has(dialog[open]) {
 }
 .credentials-box {
   background: #0e0f0c;
-  border: 1px solid #c4ff003d;
+  border: 1px solid #ffd6043d;
   border-radius: 12px;
   padding: 20px;
   margin: 20px 0;
@@ -1299,7 +1301,7 @@ body:has(dialog[open]) {
   color: var(--off);
 }
 .credentials-box dd:last-child {
-  color: var(--lime);
+  color: var(--accent);
 }
 .upload-zone {
   border: 1px dashed #ffffff38;
@@ -1315,13 +1317,13 @@ body:has(dialog[open]) {
   padding: 25px;
 }
 .upload-zone.dragover {
-  border-color: var(--lime);
-  background: #c4ff0008;
+  border-color: var(--accent);
+  background: #ffd60408;
 }
 .upload-zone svg {
   width: 32px;
   height: 32px;
-  color: var(--lime);
+  color: var(--accent);
   margin-bottom: 20px;
 }
 .upload-zone strong {
@@ -1342,7 +1344,7 @@ body:has(dialog[open]) {
   opacity: 0;
 }
 .upload-zone:focus-within {
-  outline: 2px solid var(--lime);
+  outline: 2px solid var(--accent);
   outline-offset: 4px;
 }
 .upload-progress {
@@ -1358,7 +1360,7 @@ body:has(dialog[open]) {
 .progress-track span {
   display: block;
   height: 100%;
-  background: var(--lime);
+  background: var(--accent);
   width: 0;
   transition: width 0.2s;
 }
@@ -1381,7 +1383,7 @@ body:has(dialog[open]) {
 .confirm-summary b {
   display: block;
   font-size: 27px;
-  color: var(--lime);
+  color: var(--accent);
   font-weight: 500;
   letter-spacing: -0.06em;
 }
@@ -1393,8 +1395,8 @@ body:has(dialog[open]) {
 }
 .extras-notice {
   padding: 16px;
-  border: 1px solid #c4ff0040;
-  background: #c4ff0006;
+  border: 1px solid #ffd60440;
+  background: #ffd60406;
   border-radius: 11px;
   font-size: 11px;
   line-height: 1.8;
@@ -1586,8 +1588,7 @@ body:has(dialog[open]) {
     gap: 10px;
   }
   .logo {
-    width: 120px;
-    height: 28px;
+    height: 46px;
   }
   .nav-links {
     margin-left: 0;
@@ -1851,8 +1852,7 @@ body:has(dialog[open]) {
     border-top: 0;
   }
   .auth-art .logo {
-    width: 141px;
-    height: 29px;
+    width: 90px;
   }
   .auth-art-copy {
     padding-top: 25px;
@@ -1995,7 +1995,7 @@ body:has(dialog[open]) {
     padding-inline: 11px;
   }
   .logo {
-    width: 105px;
+    height: 42px;
   }
   .nav-links button {
     font-size: 9px;

@@ -1,6 +1,6 @@
-# FractalX — Portafolio audiovisual y portal de clientes
+# Fractal — Portafolio audiovisual y portal de clientes
 
-Sitio público de fotografía, social media, producción de video y drones, basado en el diseño original guardado. El apartado privado de clientes conserva la selección y entrega de fotografías. Ambos comparten el logo, la paleta negra/lima y la navegación liquid glass.
+Sitio público de fotografía, social media, producción de video y drones, basado en el diseño original guardado. El apartado privado de clientes conserva la selección y entrega de fotografías. Ambos comparten el logo de Fractal, la paleta negra y amarilla y la navegación liquid glass.
 
 ## Iniciar
 
@@ -15,7 +15,7 @@ La web principal está en http://127.0.0.1:4173/. El portafolio público está e
 
 ## Web principal y portafolio
 
-La página principal conserva la portada y el menú flotante de vidrio de FractalX. **Portafolio** abre la galería en una página propia. Al pasar el ratón o enfocar una portada con el teclado, la imagen se desenfoca y aparece el título. En pantallas táctiles, el título queda visible debajo. Las portadas abren un visor con navegación entre los proyectos de la categoría seleccionada. El botón **Acceso clientes** abre `/clientes/`. El logo del portal y sus enlaces de regreso vuelven a la web principal.
+La página principal conserva la portada y el menú flotante de vidrio de Fractal. **Portafolio** abre la galería en una página propia. Al pasar el ratón o enfocar una portada con el teclado, la imagen se desenfoca y aparece el título. En pantallas táctiles, el título queda visible debajo. Las portadas abren un visor con navegación entre los proyectos de la categoría seleccionada. El botón **Acceso clientes** abre `/clientes/`. El logo del portal y sus enlaces de regreso vuelven a la web principal.
 
 Para publicar trabajos, entra como administrador y abre **Portafolio**:
 

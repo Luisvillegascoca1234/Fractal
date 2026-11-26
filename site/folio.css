@@ -1,10 +1,10 @@
 .folio {
   background: var(--noir);
-  padding: 6.5rem 0 clamp(3.5rem, 7vw, 7rem);
+  padding: 7.25rem 0 clamp(3.5rem, 7vw, 7rem);
 }
 
 .nav-links a[aria-current='page'] {
-  color: var(--lime);
+  color: var(--accent);
 }
 
 .folio-layout {
@@ -20,7 +20,7 @@
 
 .folio-title span,
 .folio-contact {
-  color: var(--lime);
+  color: var(--accent);
 }
 
 .folio-main {
@@ -74,8 +74,8 @@
 
 .folio .portfolio-filters button[aria-pressed='true'] {
   color: var(--noir);
-  background: var(--lime);
-  border-color: var(--lime);
+  background: var(--accent);
+  border-color: var(--accent);
   box-shadow: inset 0 1px 0 rgb(255 255 255 / 42%), 0 2px 8px rgb(0 0 0 / 24%);
 }
 
@@ -87,7 +87,7 @@
 
 .folio-preview-status {
   margin-bottom: 1.25rem;
-  color: var(--lime);
+  color: var(--accent);
   font-size: 0.875rem;
 }
 
@@ -119,7 +119,7 @@
 .folio button:focus-visible,
 .folio a:focus-visible,
 .folio-viewer button:focus-visible {
-  outline: 2px solid var(--lime);
+  outline: 2px solid var(--accent);
   outline-offset: 4px;
 }
 
@@ -145,7 +145,7 @@
 }
 
 .folio-card-video {
-  background: radial-gradient(ellipse at 70% 30%, #232a19, var(--coal) 75%);
+  background: radial-gradient(ellipse at 70% 30%, #2a2519, var(--coal) 75%);
   pointer-events: none;
 }
 
@@ -197,7 +197,7 @@
   }
 
   .folio-kind {
-    color: var(--lime);
+    color: var(--accent);
     font-weight: 600;
   }
 
@@ -241,7 +241,7 @@
 }
 
 .folio-footer a:hover {
-  color: var(--lime);
+  color: var(--accent);
 }
 
 .folio-viewer {
@@ -270,7 +270,7 @@
 
 #project-preview-label {
   padding-inline-end: 0.4rem;
-  color: var(--lime);
+  color: var(--accent);
   font-size: 0.875rem;
 }
 
@@ -302,8 +302,8 @@
 }
 
 .folio-viewer-control:hover:not(:disabled) {
-  color: var(--lime);
-  border-color: var(--lime);
+  color: var(--accent);
+  border-color: var(--accent);
 }
 
 .folio-viewer-control:disabled {
@@ -374,7 +374,7 @@
 }
 
 #project-category {
-  color: var(--lime);
+  color: var(--accent);
   font-size: 0.875rem;
 }
 
@@ -465,7 +465,7 @@
 
 @media (max-width: 767px) {
   .folio {
-    padding-top: 5.65rem;
+    padding-top: 6.25rem;
   }
 
   .folio-card[data-generated][data-reference-category='fotografia'] .folio-image,

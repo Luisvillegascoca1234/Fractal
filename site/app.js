@@ -91,7 +91,7 @@ document.addEventListener("click", (event) => {
 const form = $("#contact-form");
 function inquiry() {
   const d = new FormData(form);
-  return `FRACTALX — NUEVO PROYECTO\n\nNombre: ${d.get("name")}\nCorreo: ${d.get("email")}\nServicio: ${d.get("service") || "Por definir"}\n\nLa idea:\n${d.get("message")}\n\nContacto: ${CONTACT_EMAIL}\n`;
+  return `FRACTAL — NUEVO PROYECTO\n\nNombre: ${d.get("name")}\nCorreo: ${d.get("email")}\nServicio: ${d.get("service") || "Por definir"}\n\nLa idea:\n${d.get("message")}\n\nContacto: ${CONTACT_EMAIL}\n`;
 }
 function downloadText(content, name) {
   const url = URL.createObjectURL(
@@ -116,21 +116,21 @@ form.addEventListener("submit", (event) => {
   event.preventDefault();
   if (!form.reportValidity()) return;
   const d = new FormData(form);
-  window.location.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent("Nuevo proyecto FractalX — " + d.get("name"))}&body=${encodeURIComponent(inquiry())}`;
+  window.location.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent("Nuevo proyecto Fractal — " + d.get("name"))}&body=${encodeURIComponent(inquiry())}`;
   $(".form-disclaimer", form).textContent =
     `Si no se abrió tu correo, descarga la consulta y envíala a ${CONTACT_EMAIL}.`;
 });
 $("#download-inquiry").addEventListener("click", () => {
   if (!form.reportValidity()) return;
-  downloadText(inquiry(), "mi-proyecto-fractalx.txt");
+  downloadText(inquiry(), "mi-proyecto-fractal.txt");
   toast("Tu consulta está lista para compartir.");
 });
 $("#newsletter-form").addEventListener("submit", (event) => {
   event.preventDefault();
   const email = $("#newsletter-email").value;
   downloadText(
-    `FRACTALX — EL PRIMER ENFOQUE\n\nGuía para ${email}\n\n01 — TU HISTORIA\n¿Qué quieres mostrar o contar?\n\n02 — EL FORMATO\n¿Fotografía, contenido para redes, video o drones?\n\n03 — EL LUGAR Y LA FECHA\n¿Dónde y cuándo imaginas la producción?\n\n04 — TU AUDIENCIA\n¿Quién verá las imágenes y dónde las publicarás?\n\n05 — REFERENCIAS\nComparte tres referencias visuales y qué te gusta de ellas.\n\n06 — EL ALCANCE\n¿Cuántas piezas necesitas y cuál es tu presupuesto?\n\nHablemos: ${CONTACT_EMAIL}\n`,
-    "guia-proyecto-fractalx.txt",
+    `FRACTAL — EL PRIMER ENFOQUE\n\nGuía para ${email}\n\n01 — TU HISTORIA\n¿Qué quieres mostrar o contar?\n\n02 — EL FORMATO\n¿Fotografía, contenido para redes, video o drones?\n\n03 — EL LUGAR Y LA FECHA\n¿Dónde y cuándo imaginas la producción?\n\n04 — TU AUDIENCIA\n¿Quién verá las imágenes y dónde las publicarás?\n\n05 — REFERENCIAS\nComparte tres referencias visuales y qué te gusta de ellas.\n\n06 — EL ALCANCE\n¿Cuántas piezas necesitas y cuál es tu presupuesto?\n\nHablemos: ${CONTACT_EMAIL}\n`,
+    "guia-proyecto-fractal.txt",
   );
   toast("Tu guía está lista. Démosle forma a esa idea.");
 });
@@ -147,8 +147,8 @@ const legal = {
   terms: {
     title: "Sobre este espacio",
     paragraphs: [
-      "Este es el sitio de presentación y portafolio de FractalX. El alcance, las fechas y los importes de cada proyecto se acuerdan directamente con el estudio.",
-      "Mientras se prepara el portafolio, las referencias visuales pueden incluir imágenes de Unsplash y muestras generadas con IA. No se presentan como trabajos realizados por FractalX.",
+      "Este es el sitio de presentación y portafolio de Fractal. El alcance, las fechas y los importes de cada proyecto se acuerdan directamente con el estudio.",
+      "Mientras se prepara el portafolio, las referencias visuales pueden incluir imágenes de Unsplash y muestras generadas con IA. No se presentan como trabajos realizados por Fractal.",
       "Los trabajos publicados pertenecen a sus respectivos titulares. Los originales de las sesiones de clientes se mantienen en su apartado privado. El logotipo es el archivo proporcionado para este proyecto.",
     ],
   },
