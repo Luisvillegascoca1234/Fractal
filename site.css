@@ -4,6 +4,7 @@
 }
 .overflow-x-hidden {
   overflow-x: hidden;
+  overflow-x: clip;
 }
 .fixed {
   position: fixed;
@@ -351,5 +352,18 @@ iconify-icon svg {
   .project-dialog-image,
   .project-dialog-image:has(video) {
     height: 55dvh;
+  }
+}
+
+@media (max-width: 1023px), (hover: none) and (pointer: coarse) {
+  .hero-glow {
+    background: radial-gradient(circle closest-side, rgb(var(--accent-rgb) / 9%), transparent);
+    filter: none;
+  }
+  .client-steps::before {
+    filter: none;
+  }
+  .grain::before {
+    display: none;
   }
 }

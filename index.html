@@ -18,9 +18,10 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="/fractal-studio/styles.css" />
-    <link rel="stylesheet" href="/fractal-studio/glass-nav.css" />
-    <link rel="stylesheet" href="/fractal-studio/site.css?v=client-glass" />
+    <link rel="stylesheet" href="/fractal-studio/glass-nav.css?v=mobile-nav" />
+    <link rel="stylesheet" href="/fractal-studio/site.css?v=mobile-nav" />
     <script src="/fractal-studio/icons.js" defer></script>
+    <script src="/fractal-studio/site-nav.js" defer></script>
     <script src="/fractal-studio/app.js" defer></script>
   </head>
   <body class="overflow-x-hidden">
@@ -35,12 +36,15 @@
               width="448"
               height="384"
           /></a>
-          <div class="nav-links hidden lg:flex">
-            <a class="link-underline" href="/fractal-studio/portafolio/">Portafolio</a
-            ><a class="link-underline" href="#studio">Estudio</a
-            ><a class="link-underline" href="#services">Servicios</a
-            ><a class="link-underline" href="#contact">Contacto</a>
-          </div>
+          <details class="nav-disclosure" open>
+            <summary>Menú</summary>
+            <div class="nav-links">
+              <a class="link-underline" href="/fractal-studio/portafolio/">Portafolio</a>
+              <a class="link-underline" href="#studio">Estudio</a>
+              <a class="link-underline" href="#services">Servicios</a>
+              <a class="link-underline" href="#contact">Contacto</a>
+            </div>
+          </details>
           <a class="pill-btn pill-lime nav-cta" href="/fractal-studio/clientes/"
             >Acceso clientes
             <iconify-icon
