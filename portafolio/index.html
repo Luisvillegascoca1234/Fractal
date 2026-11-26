@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0c0c0c" />
+    <meta
+      name="description"
+      content="Explora el portafolio de fotografía, contenido para redes, video y drones de Fractal."
+    />
+    <title>Portafolio de fotografía y video — Fractal</title>
+    <link rel="icon" href="/fractal-studio/assets/fractal-logo.png" type="image/png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,800;1,900&family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/fractal-studio/styles.css" />
+    <link rel="stylesheet" href="/fractal-studio/glass-nav.css" />
+    <link rel="stylesheet" href="/fractal-studio/site.css" />
+    <link rel="stylesheet" href="/fractal-studio/folio.css" />
+    <script src="/fractal-studio/icons.js" defer></script>
+    <script src="/fractal-studio/folio.js" defer></script>
+  </head>
+  <body class="overflow-x-hidden">
+    <a href="#main" class="skip-link">Ir al contenido</a>
+    <header class="fixed top-0 inset-x-0 z-50">
+      <div class="container-shell">
+        <nav class="nav-pill" aria-label="Navegación principal">
+          <a href="/fractal-studio/" class="brand-logo" aria-label="Fractal, inicio"
+            ><img
+              src="/fractal-studio/assets/fractal-logo.png"
+              alt="Fractal"
+              width="448"
+              height="384"
+          /></a>
+          <div class="nav-links hidden lg:flex">
+            <a class="link-underline" href="/fractal-studio/portafolio/" aria-current="page">Portafolio</a
+            ><a class="link-underline" href="/fractal-studio/#studio">Estudio</a
+            ><a class="link-underline" href="/fractal-studio/#services">Servicios</a
+            ><a class="link-underline" href="/fractal-studio/#contact">Contacto</a>
+          </div>
+          <a class="pill-btn pill-lime nav-cta" href="/fractal-studio/clientes/"
+            >Acceso clientes
+            <iconify-icon
+              icon="lucide:arrow-up-right"
+              aria-hidden="true"
+            ></iconify-icon
+          ></a>
+        </nav>
+      </div>
+    </header>
+    <main id="main">
+      <section id="work" class="folio" aria-labelledby="folio-title">
+        <div class="folio-layout">
+          <h1 id="folio-title" class="display folio-title">Portafolio<span>.</span></h1>
+          <div class="folio-main">
+            <div class="folio-bar">
+              <div class="portfolio-filters glass-surface" role="group" aria-label="Filtrar portafolio">
+                <button type="button" data-category="all" aria-pressed="true">Todo</button>
+                <button type="button" data-category="fotografia" aria-pressed="false">Fotografía</button>
+                <button type="button" data-category="social" aria-pressed="false">Social media</button>
+                <button type="button" data-category="video" aria-pressed="false">Video</button>
+                <button type="button" data-category="drones" aria-pressed="false">Drones</button>
+              </div>
+              <p id="portfolio-note" class="portfolio-note" role="status">Referencias visuales</p>
+            </div>
+            <div id="portfolio-grid" class="folio-grid">
+              <article class="folio-card" data-reference-category="fotografia" data-generated>
+                <button class="folio-card-button" type="button" data-reference
+                  data-description="Estudio de retrato editorial con una paleta carmesí, luz lateral y texturas definidas."
+                  aria-labelledby="reference-crimson">
+                  <span class="folio-image">
+                    <img src="/fractal-studio/assets/folio-crimson.webp" width="1122" height="1402" alt="Retrato de una mujer con chaqueta roja sobre fondo carmesí" fetchpriority="high" />
+                  </span>
+                  <span class="folio-caption">
+                    <span id="reference-crimson" class="folio-name">Carmesí</span>
+                    <span class="folio-kind">Fotografía</span>
+                  </span>
+                </button>
+              </article>
+              <article class="folio-card" data-reference-category="social" data-generated>
+                <button class="folio-card-button" type="button" data-reference
+                  data-description="Estudio de fotografía de producto que utiliza el hielo, la condensación y un fondo saturado para resaltar la bebida."
+                  aria-labelledby="reference-citrus">
+                  <span class="folio-image">
+                    <img src="/fractal-studio/assets/folio-citrus.webp" width="1440" height="960" alt="Vaso con bebida, hielo y una rodaja de naranja" decoding="async" />
+                  </span>
+                  <span class="folio-caption">
+                    <span id="reference-citrus" class="folio-name">Cítrico</span>
+                    <span class="folio-kind">Social media</span>
+                  </span>
+                </button>
+              </article>
+              <article class="folio-card" data-reference-category="fotografia">
+                <button class="folio-card-button" type="button" data-reference
+                  data-description="Referencia de luz natural, geometría y materiales para fotografía de interiores."
+                  aria-labelledby="reference-space">
+                  <span class="folio-image">
+                    <img src="/fractal-studio/assets/halcyon.jpg" alt="Interior contemporáneo con grandes ventanales" loading="lazy" decoding="async" />
+                  </span>
+                  <span class="folio-caption">
+                    <span id="reference-space" class="folio-name">Luz interior</span>
+                    <span class="folio-kind">Fotografía</span>
+                  </span>
+                </button>
+              </article>
+              <article class="folio-card" data-reference-category="social">
+                <button class="folio-card-button" type="button" data-reference
+                  data-description="Referencia para una pieza de producto con un fondo limpio y atención a la forma."
+                  aria-labelledby="reference-object">
+                  <span class="folio-image">
+                    <img src="/fractal-studio/assets/peachnest.jpg" alt="Dos relojes sobre una superficie blanca" loading="lazy" decoding="async" />
+                  </span>
+                  <span class="folio-caption">
+                    <span id="reference-object" class="folio-name">Forma y detalle</span>
+                    <span class="folio-kind">Social media</span>
+                  </span>
+                </button>
+              </article>
+              <article class="folio-card" data-reference-category="video">
+                <button class="folio-card-button" type="button" data-reference
+                  data-description="Referencia de encuadre y atmósfera para una producción audiovisual de automoción."
+                  aria-labelledby="reference-motion">
+                  <span class="folio-image">
+                    <img src="/fractal-studio/assets/zenith.jpg" alt="Automóvil deportivo oscuro en un entorno arbolado" loading="lazy" decoding="async" />
+                  </span>
+                  <span class="folio-caption">
+                    <span id="reference-motion" class="folio-name">En movimiento</span>
+                    <span class="folio-kind">Video</span>
+                  </span>
+                </button>
+              </article>
+            </div>
+            <div id="portfolio-empty" class="portfolio-empty" hidden>
+              <p>No hay trabajos publicados en esta categoría.</p>
+              <a class="pill-btn pill-lime" href="/fractal-studio/#contact">Cuéntanos tu idea</a>
+            </div>
+          </div>
+          <a class="display folio-contact" href="/fractal-studio/#contact">Hablemos</a>
+        </div>
+      </section>
+    </main>
+    <footer class="folio-footer">
+      <div class="container-shell">
+        <a href="/fractal-studio/">Volver al inicio</a>
+        <a href="/fractal-studio/#contact">Contacto</a>
+      </div>
+    </footer>
+    <dialog id="project-dialog" class="folio-viewer" aria-labelledby="project-title">
+      <div class="folio-viewer-bar">
+        <button class="folio-viewer-control folio-close" type="button" data-close autofocus>
+          <iconify-icon icon="lucide:x" aria-hidden="true"></iconify-icon>
+          <span>Cerrar</span>
+        </button>
+        <div class="folio-viewer-nav" role="group" aria-label="Navegar proyectos">
+          <button class="folio-viewer-control" type="button" data-project-step="-1" aria-label="Proyecto anterior">
+            <iconify-icon icon="lucide:chevron-left" aria-hidden="true"></iconify-icon>
+          </button>
+          <span id="project-position" aria-live="polite"></span>
+          <button class="folio-viewer-control" type="button" data-project-step="1" aria-label="Proyecto siguiente">
+            <iconify-icon icon="lucide:chevron-right" aria-hidden="true"></iconify-icon>
+          </button>
+        </div>
+      </div>
+      <div id="project-image" class="folio-viewer-media"></div>
+      <div class="folio-viewer-info">
+        <div>
+          <p id="project-category"></p>
+          <h2 id="project-title" class="display"></h2>
+          <p id="project-description"></p>
+        </div>
+        <a class="pill-btn pill-lime" href="/fractal-studio/#contact">Hablemos de tu idea</a>
+      </div>
+    </dialog>
+  </body>
+</html>

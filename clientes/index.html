@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0c0c0c" />
+    <title>Acceso clientes — Fractal</title>
+    <link rel="icon" href="/fractal-studio/assets/fractal-logo.png" type="image/png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;600;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/fractal-studio/styles.css" />
+    <link rel="stylesheet" href="/fractal-studio/glass-nav.css" />
+    <link rel="stylesheet" href="/fractal-studio/site.css" />
+    <style>
+      .preview-shell {
+        min-height: 100vh;
+        min-height: 100svh;
+        display: grid;
+        place-items: center;
+        padding: clamp(1.5rem, 5vw, 4rem);
+        background: radial-gradient(ellipse at 80% 0, rgb(var(--accent-rgb) / 8%), transparent 65%);
+      }
+      .preview-content { width: min(100%, 36rem); }
+      .preview-content .footer-logo { margin-bottom: 2rem; }
+      .preview-title { font-size: clamp(2.4rem, 8vw, 5.75rem); line-height: 1.02; margin: .75rem 0 1rem; }
+      .preview-copy { max-width: 37ch; color: var(--off); line-height: 1.65; }
+      .preview-actions { display: flex; flex-wrap: wrap; gap: .65rem; margin-top: 1.5rem; }
+    </style>
+  </head>
+  <body class="overflow-x-hidden">
+    <main class="preview-shell">
+      <section class="preview-content" aria-labelledby="preview-title">
+        <a class="brand-logo footer-logo" href="/fractal-studio/" aria-label="Fractal, inicio">
+          <img src="/fractal-studio/assets/fractal-logo.png" alt="Fractal" width="448" height="384" />
+        </a>
+        <p class="eyebrow">Vista previa</p>
+        <h1 id="preview-title" class="display preview-title">Acceso clientes<span class="text-lime">.</span></h1>
+        <p class="preview-copy">Esta vista previa muestra el sitio público de Fractal. El acceso a las galerías privadas estará disponible en el portal publicado.</p>
+        <div class="preview-actions">
+          <a class="pill-btn pill-lime" href="/fractal-studio/portafolio/">Ver portafolio</a>
+          <a class="pill-btn pill-outline" href="/fractal-studio/">Volver al inicio</a>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
